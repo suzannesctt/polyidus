@@ -4,6 +4,7 @@ import os
 import pandas as pd
 import pysam
 import subprocess
+import pdb
 
 
 CIGAR_DEFS = {0: "Match", 1: "Insertion", 2: "Deletion",
@@ -87,7 +88,8 @@ def get_host_pos(viralbam, hostbam, chromhost, start_host,
     vir_chroms = []
     new_read_names = []
     # Suggested by johnstonmj to make sure not exceeding chrom bounds
-    chromsize = bam.header.get_reference_length(chromhost)
+    #chromsize = bam.header.get_reference_length(chromhost)
+    chromsize = bam.lengths[bam.references.index(chromhost)]
     lower_bound = max([0, start_host - 2000])
     upper_bound = min([start_host + 2000, chromsize])
     # Iterate through the reads within the bounds
