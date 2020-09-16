@@ -87,7 +87,7 @@ def get_host_pos(viralbam, hostbam, chromhost, start_host,
     vir_chroms = []
     new_read_names = []
     # Suggested by johnstonmj to make sure not exceeding chrom bounds
-    chromsize = bam.header.get_reference_length(chromhost)
+    chromsize = bam.lengths[bam.references.index(chromhost)]
     lower_bound = max([0, start_host - 2000])
     upper_bound = min([start_host + 2000, chromsize])
     # Iterate through the reads within the bounds
@@ -668,7 +668,7 @@ def find_integration(host_bam, viral_bam, paired_end):
         dict_reads_host = get_read_dict(host_bam)
         integration_dict = annotate_regions(
             dict_reads_virus, dict_reads_host)
-    print(integration_dict)
+    #print(integration_dict)
     out_dict = summarize_integration(
         integration_dict, WINDOW)
     out_list = []
@@ -967,7 +967,7 @@ class polyidusEngine:
         with open(self.integpath_approximate, "w") as out_link:
             for each_list in integlist:
                 out_str = "\t".join(each_list) + "\n"
-                print(out_str)
+                #print(out_str)
                 out_link.write(out_str)
 
     def find_exact_integrations(self):
@@ -1010,6 +1010,6 @@ class polyidusEngine:
                         for key in keys:
                             adlist.append(str(dictposes[key][j]))
                         adlist.append(samplename)
-                        print("\t".join(adlist))
+                        #print("\t".join(adlist))
                         outlink.write("\t".join(adlist) + "\n")
         outlink.close()
