@@ -675,9 +675,9 @@ def find_integration(host_bam, viral_bam, paired_end):
         integration_dict, WINDOW)
     out_list = []
     for each_integration, each_dict in out_dict.items():
-        if int(each_dict["Supporting reads"]) > 1:
+        if int(each_dict["Supporting reads"]) >= 1:
             read_names = each_dict.get("ReadName", "NoReadFound")
-            read_names = ", ".join(np.unique(read_names.split(", ")))
+            #read_names = ", ".join(np.unique(read_names.split(", ")))
             supp_reads = each_dict["Supporting reads"]
             score_reads = each_dict["Score"]
             try:
