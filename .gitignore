@@ -1,3 +1,6 @@
 data/
 polyidus-data-v1.tar.gz
 test/
+polyidusOutput*
+*.log
+src/__pycache__/
